@@ -38,11 +38,11 @@ mixin _$HomeController on _HomeControllerBase, Store {
       ActionController(name: '_HomeControllerBase');
 
   @override
-  void calculo() {
+  void calcule({List<String> num, List<String> ope}) {
     final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
-        name: '_HomeControllerBase.calculo');
+        name: '_HomeControllerBase.calcule');
     try {
-      return super.calculo();
+      return super.calcule(num: num, ope: ope);
     } finally {
       _$_HomeControllerBaseActionController.endAction(_$actionInfo);
     }
