@@ -3,19 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'home_controller.dart';
+import 'android_controller.dart';
 
-class HomePage extends StatefulWidget {
+class AndroidPage extends StatefulWidget {
   final String title;
-  const HomePage({Key key, this.title = "Calculadora"}) : super(key: key);
+  const AndroidPage({Key key, this.title = "Android"}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _AndroidPageState createState() => _AndroidPageState();
 }
 
-class _HomePageState extends ModularState<HomePage, HomeController> {
-  //use 'controller' variable to access controller
-
+class _AndroidPageState extends ModularState<AndroidPage, AndroidController> {
   Widget botaozinho(valor, {child}) {
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -40,27 +38,66 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           child: Column(
             children: [
               Expanded(
-                flex: 2,
                 child: Container(
-                  width: double.infinity,
                   child: Align(
-                    alignment: Alignment.centerRight,
+                    alignment: Alignment.bottomRight,
                     child: Observer(
                       builder: (context) {
-                        return AutoSizeText(controller.display,
-                            style: TextStyle(
-                              fontSize: 82,
-                              fontWeight: FontWeight.w300,
-                            ),
-                            maxLines: 1,
-                            minFontSize: 32);
+                        bool value = controller.hasConnected;
+
+                        return PopupMenuButton<String>(
+                          onSelected: (String result) {
+                            if (result == "connect") {
+                              controller.alterConnect(true);
+                            } else {
+                              controller.alterConnect(false);
+                            }
+                          },
+                          itemBuilder: (BuildContext context) =>
+                              <PopupMenuEntry<String>>[
+                            value
+                                ? const PopupMenuItem<String>(
+                                    value: "desconnect",
+                                    child: Text('Desconectar da API'),
+                                  )
+                                : const PopupMenuItem<String>(
+                                    value: "connect",
+                                    child: Text('Conectar com a API'),
+                                  ),
+                          ],
+                        );
                       },
                     ),
                   ),
                 ),
               ),
               Expanded(
-                flex: 3,
+                flex: 5,
+                child: Container(
+                  padding: EdgeInsets.only(
+                    right: 12,
+                  ),
+                  width: double.infinity,
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Observer(
+                      builder: (context) {
+                        return AutoSizeText(
+                          controller.display,
+                          style: TextStyle(
+                            fontSize: 82,
+                            fontWeight: FontWeight.w300,
+                          ),
+                          maxLines: 1,
+                          minFontSize: 32,
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 10,
                 child: Container(
                   height: double.infinity,
                   width: double.infinity,

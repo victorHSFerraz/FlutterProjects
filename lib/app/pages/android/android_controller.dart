@@ -1,19 +1,17 @@
+import 'package:calculadora_app/app/shared/repository/api_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
-part 'home_controller.g.dart';
-
-class Valores {
-  List<String> numeros;
-  List<String> operadores;
-
-  Valores(this.numeros, this.operadores);
-}
+part 'android_controller.g.dart';
 
 @Injectable()
-class HomeController = _HomeControllerBase with _$HomeController;
+class AndroidController = _AndroidControllerBase with _$AndroidController;
 
-abstract class _HomeControllerBase with Store {
+abstract class _AndroidControllerBase with Store {
+  final ApiRepository _apiRepository;
+
+  _AndroidControllerBase(this._apiRepository);
+
   double calculoDeValores = 0.0;
 
   double calculeTheTwoFactorys(List<String> values) {
@@ -206,6 +204,9 @@ abstract class _HomeControllerBase with Store {
   }
 
   @action
+  void alterConnect(bool value) => hasConnected = value;
+
+  @action
   void calcule({List<String> num, List<String> ope}) {
     List<String> numeros = [];
     List<String> operadores = [];
@@ -270,7 +271,13 @@ abstract class _HomeControllerBase with Store {
   }
 
   @observable
+  bool hasConnected = false;
+
+  @observable
   String display = "0";
+
+  @action
+  void calculeApi() {}
 
   @action
   void displayInput(String valor) {
@@ -284,10 +291,22 @@ abstract class _HomeControllerBase with Store {
     }
 
     if (valor == "=") {
-      calcule();
+      if (hasConnected) {
+        calculeApi();
+      } else {
+        calcule();
+      }
+
       return;
     }
 
     display += valor;
   }
+}
+
+class Valores {
+  List<String> numeros;
+  List<String> operadores;
+
+  Valores(this.numeros, this.operadores);
 }
