@@ -53,6 +53,17 @@ mixin _$AndroidController on _AndroidControllerBase, Store {
       ActionController(name: '_AndroidControllerBase');
 
   @override
+  void alterConnect(bool value, GlobalKey<ScaffoldState> key) {
+    final _$actionInfo = _$_AndroidControllerBaseActionController.startAction(
+        name: '_AndroidControllerBase.alterConnect');
+    try {
+      return super.alterConnect(value, key);
+    } finally {
+      _$_AndroidControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void calcule({List<String> num, List<String> ope}) {
     final _$actionInfo = _$_AndroidControllerBaseActionController.startAction(
         name: '_AndroidControllerBase.calcule');

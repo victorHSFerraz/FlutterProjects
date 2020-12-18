@@ -1,4 +1,6 @@
 import 'package:calculadora_app/app/shared/repository/api_repository.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
@@ -204,7 +206,23 @@ abstract class _AndroidControllerBase with Store {
   }
 
   @action
-  void alterConnect(bool value) => hasConnected = value;
+  void alterConnect(bool value, GlobalKey<ScaffoldState> key) {
+    hasConnected = value;
+
+    if (hasConnected) {
+      key.currentState.showSnackBar(
+        SnackBar(
+          content: Text('Conectado com Sucesso!'),
+        ),
+      );
+    } else {
+      key.currentState.showSnackBar(
+        SnackBar(
+          content: Text('Desconectado'),
+        ),
+      );
+    }
+  }
 
   @action
   void calcule({List<String> num, List<String> ope}) {
@@ -270,14 +288,14 @@ abstract class _AndroidControllerBase with Store {
     }
   }
 
+  @action
+  void calculeApi() {}
+
   @observable
   bool hasConnected = false;
 
   @observable
   String display = "0";
-
-  @action
-  void calculeApi() {}
 
   @action
   void displayInput(String valor) {

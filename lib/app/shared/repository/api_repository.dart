@@ -1,5 +1,4 @@
 import 'package:calculadora_app/app/shared/service/api_service.dart';
-import 'package:dio/native_imp.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 part 'api_repository.g.dart';

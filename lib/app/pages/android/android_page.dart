@@ -14,6 +14,8 @@ class AndroidPage extends StatefulWidget {
 }
 
 class _AndroidPageState extends ModularState<AndroidPage, AndroidController> {
+  final GlobalKey<ScaffoldState> keyScaffold = GlobalKey<ScaffoldState>();
+
   Widget botaozinho(valor, {child}) {
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -33,6 +35,7 @@ class _AndroidPageState extends ModularState<AndroidPage, AndroidController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: keyScaffold,
       body: SafeArea(
         child: Center(
           child: Column(
@@ -48,9 +51,9 @@ class _AndroidPageState extends ModularState<AndroidPage, AndroidController> {
                         return PopupMenuButton<String>(
                           onSelected: (String result) {
                             if (result == "connect") {
-                              controller.alterConnect(true);
+                              controller.alterConnect(true, keyScaffold);
                             } else {
-                              controller.alterConnect(false);
+                              controller.alterConnect(false, keyScaffold);
                             }
                           },
                           itemBuilder: (BuildContext context) =>
