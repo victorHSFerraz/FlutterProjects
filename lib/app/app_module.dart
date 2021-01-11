@@ -21,7 +21,7 @@ class AppModule extends MainModule {
           (i) => AndroidController(i.get<ApiRepository>()),
         ),
         Bind(
-          (i) => ApiRepository(i.get<ApiService>()),
+          (i) => ApiRepository(i.get<Dio>()),
         ),
         Bind(
           (i) => ApiService(i.get<Http>()),
