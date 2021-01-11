@@ -212,7 +212,7 @@ abstract class _AndroidControllerBase with Store {
     if (hasConnected) {
       key.currentState.showSnackBar(
         SnackBar(
-          content: Text('Conectado com Sucesso!'),
+          content: Text('Conectado'),
         ),
       );
     } else {

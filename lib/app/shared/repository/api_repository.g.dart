@@ -7,7 +7,7 @@ part of 'api_repository.dart';
 // **************************************************************************
 
 final $ApiRepository = BindInject(
-  (i) => ApiRepository(i<ApiService>()),
+  (i) => ApiRepository(i<DioForNative>()),
   singleton: true,
   lazy: true,
 );
