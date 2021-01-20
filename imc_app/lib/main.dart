@@ -83,6 +83,12 @@ class _MyAppState extends State<MyApp> {
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black, fontSize: 20.0),
                 controller: weightController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "Insira seu peso!";
+                  }
+                  return null;
+                },
               ),
               TextFormField(
                 keyboardType: TextInputType.number,
@@ -90,13 +96,23 @@ class _MyAppState extends State<MyApp> {
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black, fontSize: 20.0),
                 controller: heightController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "Insira sua altura!";
+                  }
+                  return null;
+                },
               ),
               Padding(
                 padding: EdgeInsets.only(top: 10.0),
                 child: Container(
                   height: 50.0,
                   child: RaisedButton(
-                    onPressed: _calculate,
+                    onPressed: () {
+                      if (_formKey.currentState.validate()) {
+                        _calculate();
+                      }
+                    },
                     child: Text(
                       "Calcular",
                       style: TextStyle(color: Colors.white, fontSize: 20.0),
