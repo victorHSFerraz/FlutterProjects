@@ -24,6 +24,7 @@ class _MyAppState extends State<MyApp> {
     weightController.text = "";
     heightController.text = "";
     _infoText = "Informe seus dados";
+    _formKey = GlobalKey<FormState>();
   }
 
   void _calculate() {
@@ -85,7 +86,7 @@ class _MyAppState extends State<MyApp> {
                 controller: weightController,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Insira seu peso!";
+                    return "Insira o peso!";
                   }
                   return null;
                 },
@@ -98,7 +99,7 @@ class _MyAppState extends State<MyApp> {
                 controller: heightController,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Insira sua altura!";
+                    return "Insira a altura!";
                   }
                   return null;
                 },
