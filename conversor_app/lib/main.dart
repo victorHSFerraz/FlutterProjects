@@ -9,9 +9,9 @@ void main() async {
     theme: ThemeData(hintColor: Colors.green, primaryColor: Colors.white),
   ));
 }
-
+// alterar a API_KEY na URL para uma key válida
 Future<Map> getData() async {
-  String request = "https://api.hgbrasil.com/finance?format=json%key=621664cb";
+  String request = "https://api.hgbrasil.com/finance?format=json%key=API_KEY";
 
   http.Response response = await http.get(request);
   return json.decode(response.body);
