@@ -27,8 +27,49 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final realController = TextEditingController();
+  final dolarController = TextEditingController();
+  final euroController = TextEditingController();
+
+  double real;
   double dolar;
   double euro;
+
+  void _clearAll() {
+    realController.text = "";
+    dolarController.text = "";
+    euroController.text = "";
+  }
+
+  void _realChanged(String text) {
+    if (text.isEmpty) {
+      _clearAll();
+      return;
+    }
+    double real = double.parse(text);
+    dolarController.text = (real / dolar).toStringAsFixed(2);
+    euroController.text = (real / euro).toStringAsFixed(2);
+  }
+
+  void _dolarChanged(String text) {
+    if (text.isEmpty) {
+      _clearAll();
+      return;
+    }
+    double dolar = double.parse(text);
+    realController.text = (dolar * this.dolar).toStringAsFixed(2);
+    euroController.text = (dolar * this.dolar / euro).toStringAsFixed(2);
+  }
+
+  void _euroChanged(String text) {
+    if (text.isEmpty) {
+      _clearAll();
+      return;
+    }
+    double euro = double.parse(text);
+    realController.text = (euro * this.euro).toStringAsFixed(2);
+    dolarController.text = (euro * this.euro / dolar).toStringAsFixed(2);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +132,7 @@ class _HomeState extends State<Home> {
                             flex: 2,
                             child: Container(
                               child: Text(
-                                "\nCotaçõa Dólar R\$${dolar.toStringAsPrecision(3)} \n\nCotação Euro R\$${euro.toStringAsPrecision(3)}",
+                                "\nCotaçõa Dólar R\$${dolar.toStringAsFixed(2)} \n\nCotação Euro R\$${euro.toStringAsFixed(2)}",
                                 style: TextStyle(
                                     fontStyle: FontStyle.italic,
                                     fontSize: 13.0,
@@ -106,14 +147,19 @@ class _HomeState extends State<Home> {
                         ],
                       ),
                       Padding(
-                          padding: EdgeInsets.only(top: 10.0),
-                          child: buildTextField("REAL", "R\$")),
+                        padding: EdgeInsets.only(top: 10.0),
+                        child: buildTextField(
+                            "REAL", "R\$", realController, _realChanged),
+                      ),
                       Padding(
-                          padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-                          child: buildTextField("DÓLAR", "US\$")),
+                        padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                        child: buildTextField(
+                            "DÓLAR", "US\$", dolarController, _dolarChanged),
+                      ),
                       Padding(
                         padding: EdgeInsets.only(bottom: 10.0),
-                        child: buildTextField("EURO", "€"),
+                        child: buildTextField(
+                            "EURO", "€", euroController, _euroChanged),
                       )
                     ],
                   ),
@@ -126,13 +172,16 @@ class _HomeState extends State<Home> {
   }
 }
 
-Widget buildTextField(String label, String prefix) {
+Widget buildTextField(
+    String label, String prefix, TextEditingController c, Function f) {
   return TextField(
+    controller: c,
     keyboardType: TextInputType.numberWithOptions(),
     decoration: InputDecoration(
       labelText: label,
       prefixText: prefix,
       border: OutlineInputBorder(),
     ),
+    onChanged: f,
   );
 }
