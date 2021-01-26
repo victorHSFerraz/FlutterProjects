@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gifs_app/ui/gif_page.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:share/share.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   Future<Map> _getGifs() async {
     http.Response response;
 
-    if (_search == null) {
+    if (_search == null || _search.isEmpty) {
       response = await http.get(
           "https://api.giphy.com/v1/gifs/trending?api_key=PQbT76cmGMfkXQlyueGg5CLaLI7CNfTX&limit=20&rating=g");
     } else {
@@ -60,8 +63,9 @@ class _HomePageState extends State<HomePage> {
                     fontStyle: FontStyle.italic,
                     fontSize: 17.0),
                 focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(50.0),
-                    borderSide: BorderSide(width: 1.0, color: Colors.white)),
+                  borderRadius: BorderRadius.circular(50.0),
+                  borderSide: BorderSide(width: 1.0, color: Colors.white),
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50.0),
                   borderSide: BorderSide(width: 1.0, color: Colors.white),
@@ -69,11 +73,14 @@ class _HomePageState extends State<HomePage> {
                 hintText: "dogs",
                 hintStyle: TextStyle(color: Colors.grey),
               ),
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Colors.white, decoration: TextDecoration.none),
               onSubmitted: (text) {
-                setState(() {
-                  _search = text;
-                });
+                setState(
+                  () {
+                    _search = text;
+                  },
+                );
               },
             ),
           ),
@@ -123,6 +130,18 @@ class _HomePageState extends State<HomePage> {
             height: 300.0,
             fit: BoxFit.cover,
           ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => GifPage(snapshot.data["data"][index]),
+              ),
+            );
+          },
+          onLongPress: () {
+            Share.share(
+                snapshot.data["data"][index]["images"]["fixed_height"]["url"]);
+          },
         );
       },
     );
