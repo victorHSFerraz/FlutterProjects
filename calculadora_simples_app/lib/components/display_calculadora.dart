@@ -1,4 +1,5 @@
 import 'package:calculadora_simples_app/model/request_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -15,10 +16,11 @@ class _DisplayCalculadoraState extends State<DisplayCalculadora> {
   String display = "0";
   String numX = "";
   String numY = "";
+  String numZ = "";
   List<String> displayNum = [];
   int position = 1;
   int operacao = 0;
-  double resultado = 0;
+  int resultado = 0;
   final numericRegex = RegExp(r'^[0-9]+$');
 
   Widget buttonPad(String valor) {
@@ -31,11 +33,11 @@ class _DisplayCalculadoraState extends State<DisplayCalculadora> {
         fillColor: Colors.grey,
         onPressed: () async {
           if (valor == "SAVE") {
-            final RequestModel request =
-                await sendResult(userId, int.parse(numX), int.parse(numY));
+            final RequestModel request = await sendResult(
+                userId, int.parse(numZ), int.parse(numY), operacao);
 
             _request = request;
-            print(_request);
+            print(_request.operacaoId);
           }
           setState(() {
             if (numericRegex.hasMatch(valor) && position == 1) {
@@ -48,9 +50,6 @@ class _DisplayCalculadoraState extends State<DisplayCalculadora> {
               numY = displayNum.join("");
               display = numY;
             }
-            //if (valor == "SAVE") {
-            //sendResult(userId, int.parse(numX), int.parse(numY));
-            //}
             if (valor == "DEL") {
               displayNum = [];
               numX = "";
@@ -84,28 +83,32 @@ class _DisplayCalculadoraState extends State<DisplayCalculadora> {
               displayNum = [];
             }
             if (valor == "=") {
-              double x = double.parse(numX);
-              double y = double.parse(numY);
+              int x = int.parse(numX);
+              int y = int.parse(numY);
               switch (operacao) {
                 case (1):
                   resultado = x + y;
-                  //numX = resultado.toString();
+                  numZ = numX;
+                  numX = resultado.toString();
                   display = resultado.toString();
                   break;
                 case (2):
                   resultado = x - y;
+                  numZ = numX;
                   numX = resultado.toString();
                   display = resultado.toString();
                   break;
                 case (3):
                   resultado = x * y;
+                  numZ = numX;
                   numX = resultado.toString();
                   display = resultado.toString();
                   break;
                 case (4):
-                  resultado = x / y;
+                  resultado = (x / y).floor();
+                  numZ = numX;
                   numX = resultado.toString();
-                  display = resultado.toStringAsFixed(2);
+                  display = resultado.toString();
                   break;
               }
             }
@@ -121,7 +124,9 @@ class _DisplayCalculadoraState extends State<DisplayCalculadora> {
             ),
           ),
         ),
-        shape: CircleBorder(),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0),
+        ),
       ),
     );
   }
@@ -209,8 +214,26 @@ class _DisplayCalculadoraState extends State<DisplayCalculadora> {
   }
 }
 
-Future<RequestModel> sendResult(int userId, int numX, int numY) async {
-  var url = "https://dev.api.amanet.com.br/v1/Calculadora/somar";
+Future<RequestModel> sendResult(
+    int userId, int numX, int numY, int operacao) async {
+  String tipo = "";
+
+  switch (operacao) {
+    case (1):
+      tipo = "somar";
+      break;
+    case (2):
+      tipo = "subtrair";
+      break;
+    case (3):
+      tipo = "multiplicar";
+      break;
+    case (4):
+      tipo = "dividir";
+      break;
+  }
+
+  var url = "https://dev.api.amanet.com.br/v1/Calculadora/$tipo";
 
   final http.Response response = await http.post(Uri.encodeFull(url),
       body: json.encode({
