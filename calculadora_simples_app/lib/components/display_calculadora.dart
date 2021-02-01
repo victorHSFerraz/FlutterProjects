@@ -252,7 +252,6 @@ Future<RequestModel> sendResult(
 
     return requestModelFromJson(responseString);
   } else {
-    print(response.statusCode);
-    return null;
+    throw Exception("Error code ${response.statusCode}");
   }
 }
