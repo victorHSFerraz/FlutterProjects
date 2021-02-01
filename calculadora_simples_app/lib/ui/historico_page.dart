@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,12 +35,10 @@ class _HistoricoCalculadoraState extends State<HistoricoCalculadora> {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
                 case ConnectionState.waiting:
-                  return Container(
-                    width: 200.0,
-                    height: 200.0,
-                    alignment: Alignment.center,
+                  return Center(
+                    heightFactor: 16.0,
                     child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
                       strokeWidth: 5.0,
                     ),
                   );
@@ -51,6 +50,7 @@ class _HistoricoCalculadoraState extends State<HistoricoCalculadora> {
                   else
                     return Expanded(
                       child: ListView.builder(
+                        reverse: false,
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         itemCount: snapshot.data.length,
