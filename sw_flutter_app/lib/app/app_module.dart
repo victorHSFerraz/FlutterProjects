@@ -1,3 +1,5 @@
+import 'shared/service/geo_service.dart';
+import 'shared/repository/geo_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:sw_flutter_app/app/modules/financas/financas_module.dart';
 import 'package:sw_flutter_app/app/shared/core/custom_dio.dart';
@@ -15,6 +17,8 @@ import 'modules/home/home_module.dart';
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
+        $GeoService,
+        $GeoRepository,
         $AppController,
         Bind(
           (i) => CustomDio(BaseOptions()),
