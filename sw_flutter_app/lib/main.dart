@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/home_page.dart';
+import 'package:sw_flutter_app/app/app_module.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-//https://swapi.dev/api/
-
-void main() {
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
-    ),
-  );
-}
+void main() => runApp(ModularApp(module: AppModule()));
