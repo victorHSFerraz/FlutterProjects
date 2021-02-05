@@ -12,9 +12,9 @@ class GeoService extends Disposable {
 
   GeoService(this._dio);
 
-  Future<Response> get(double latitude, double longitude) async {
+  Future<Response> get() async {
     var response = await _dio.get(
-        "https://api.hgbrasil.com/geoip?${ConstantApp.token}&address=remote&precision=false");
+        "https://api.hgbrasil.com/geoip?key=${ConstantApp.token}&address=remote&precision=false");
 
     return response;
   }

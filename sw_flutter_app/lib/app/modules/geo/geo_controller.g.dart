@@ -7,7 +7,7 @@ part of 'geo_controller.dart';
 // **************************************************************************
 
 final $GeoController = BindInject(
-  (i) => GeoController(),
+  (i) => GeoController(repository: i<GeoRepository>()),
   singleton: true,
   lazy: true,
 );
@@ -19,39 +19,48 @@ final $GeoController = BindInject(
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$GeoController on _GeoControllerBase, Store {
-  final _$valueAtom = Atom(name: '_GeoControllerBase.value');
+  final _$loadingAtom = Atom(name: '_GeoControllerBase.loading');
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
     });
   }
 
-  final _$_GeoControllerBaseActionController =
-      ActionController(name: '_GeoControllerBase');
+  final _$helperAtom = Atom(name: '_GeoControllerBase.helper');
 
   @override
-  void increment() {
-    final _$actionInfo = _$_GeoControllerBaseActionController.startAction(
-        name: '_GeoControllerBase.increment');
-    try {
-      return super.increment();
-    } finally {
-      _$_GeoControllerBaseActionController.endAction(_$actionInfo);
-    }
+  GeoHelper get helper {
+    _$helperAtom.reportRead();
+    return super.helper;
+  }
+
+  @override
+  set helper(GeoHelper value) {
+    _$helperAtom.reportWrite(value, super.helper, () {
+      super.helper = value;
+    });
+  }
+
+  final _$getAsyncAction = AsyncAction('_GeoControllerBase.get');
+
+  @override
+  Future<void> get() {
+    return _$getAsyncAction.run(() => super.get());
   }
 
   @override
   String toString() {
     return '''
-value: ${value}
+loading: ${loading},
+helper: ${helper}
     ''';
   }
 }

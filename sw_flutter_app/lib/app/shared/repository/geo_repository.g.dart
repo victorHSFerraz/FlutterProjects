@@ -7,7 +7,7 @@ part of 'geo_repository.dart';
 // **************************************************************************
 
 final $GeoRepository = BindInject(
-  (i) => GeoRepository(i<DioForNative>()),
+  (i) => GeoRepository(service: i<GeoService>()),
   singleton: true,
   lazy: true,
 );

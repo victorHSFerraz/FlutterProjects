@@ -2,21 +2,21 @@ class FinanceHelper {
   String by;
   bool validKey;
   Results results;
-  int executionTime;
+  double executionTime;
   bool fromCache;
 
   FinanceHelper(
       {this.by,
-        this.validKey,
-        this.results,
-        this.executionTime,
-        this.fromCache});
+      this.validKey,
+      this.results,
+      this.executionTime,
+      this.fromCache});
 
   FinanceHelper.fromJson(Map<String, dynamic> json) {
     by = json['by'];
     validKey = json['valid_key'];
     results =
-    json['results'] != null ? new Results.fromJson(json['results']) : null;
+        json['results'] != null ? new Results.fromJson(json['results']) : null;
     executionTime = json['execution_time'];
     fromCache = json['from_cache'];
   }
@@ -43,20 +43,20 @@ class Results {
 
   Results(
       {this.currencies,
-        this.stocks,
-        this.availableSources,
-        this.bitcoin,
-        this.taxes});
+      this.stocks,
+      this.availableSources,
+      this.bitcoin,
+      this.taxes});
 
   Results.fromJson(Map<String, dynamic> json) {
     currencies = json['currencies'] != null
         ? new Currencies.fromJson(json['currencies'])
         : null;
     stocks =
-    json['stocks'] != null ? new Stocks.fromJson(json['stocks']) : null;
+        json['stocks'] != null ? new Stocks.fromJson(json['stocks']) : null;
     availableSources = json['available_sources'].cast<String>();
     bitcoin =
-    json['bitcoin'] != null ? new Bitcoin.fromJson(json['bitcoin']) : null;
+        json['bitcoin'] != null ? new Bitcoin.fromJson(json['bitcoin']) : null;
     if (json['taxes'] != null) {
       taxes = new List<Taxes>();
       json['taxes'].forEach((v) {
@@ -98,15 +98,15 @@ class Currencies {
 
   Currencies(
       {this.source,
-        this.uSD,
-        this.eUR,
-        this.gBP,
-        this.aRS,
-        this.cAD,
-        this.aUD,
-        this.jPY,
-        this.cNY,
-        this.bTC});
+      this.uSD,
+      this.eUR,
+      this.gBP,
+      this.aRS,
+      this.cAD,
+      this.aUD,
+      this.jPY,
+      this.cNY,
+      this.bTC});
 
   Currencies.fromJson(Map<String, dynamic> json) {
     source = json['source'];
@@ -183,7 +183,7 @@ class USD {
 class GBP {
   String name;
   double buy;
-  Null sell;
+  dynamic sell;
   double variation;
 
   GBP({this.name, this.buy, this.sell, this.variation});
@@ -208,8 +208,8 @@ class GBP {
 class CAD {
   String name;
   double buy;
-  Null sell;
-  int variation;
+  dynamic sell;
+  double variation;
 
   CAD({this.name, this.buy, this.sell, this.variation});
 
@@ -243,7 +243,7 @@ class Stocks {
         ? new IBOVESPA.fromJson(json['IBOVESPA'])
         : null;
     nASDAQ =
-    json['NASDAQ'] != null ? new IBOVESPA.fromJson(json['NASDAQ']) : null;
+        json['NASDAQ'] != null ? new IBOVESPA.fromJson(json['NASDAQ']) : null;
     cAC = json['CAC'] != null ? new CAC.fromJson(json['CAC']) : null;
     nIKKEI = json['NIKKEI'] != null ? new CAC.fromJson(json['NIKKEI']) : null;
   }
@@ -269,15 +269,15 @@ class Stocks {
 class IBOVESPA {
   String name;
   String location;
-  double points;
+  double podoubles;
   double variation;
 
-  IBOVESPA({this.name, this.location, this.points, this.variation});
+  IBOVESPA({this.name, this.location, this.podoubles, this.variation});
 
   IBOVESPA.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     location = json['location'];
-    points = json['points'];
+    podoubles = json['podoubles'];
     variation = json['variation'];
   }
 
@@ -285,7 +285,7 @@ class IBOVESPA {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['name'] = this.name;
     data['location'] = this.location;
-    data['points'] = this.points;
+    data['podoubles'] = this.podoubles;
     data['variation'] = this.variation;
     return data;
   }
@@ -322,10 +322,10 @@ class Bitcoin {
 
   Bitcoin(
       {this.blockchainInfo,
-        this.coinbase,
-        this.bitstamp,
-        this.foxbit,
-        this.mercadobitcoin});
+      this.coinbase,
+      this.bitstamp,
+      this.foxbit,
+      this.mercadobitcoin});
 
   Bitcoin.fromJson(Map<String, dynamic> json) {
     blockchainInfo = json['blockchain_info'] != null
@@ -338,7 +338,7 @@ class Bitcoin {
         ? new BlockchainInfo.fromJson(json['bitstamp'])
         : null;
     foxbit =
-    json['foxbit'] != null ? new Coinbase.fromJson(json['foxbit']) : null;
+        json['foxbit'] != null ? new Coinbase.fromJson(json['foxbit']) : null;
     mercadobitcoin = json['mercadobitcoin'] != null
         ? new BlockchainInfo.fromJson(json['mercadobitcoin'])
         : null;
@@ -424,19 +424,19 @@ class Coinbase {
 
 class Taxes {
   String date;
-  int cdi;
-  int selic;
+  double cdi;
+  double selic;
   double dailyFactor;
   double selicDaily;
   double cdiDaily;
 
   Taxes(
       {this.date,
-        this.cdi,
-        this.selic,
-        this.dailyFactor,
-        this.selicDaily,
-        this.cdiDaily});
+      this.cdi,
+      this.selic,
+      this.dailyFactor,
+      this.selicDaily,
+      this.cdiDaily});
 
   Taxes.fromJson(Map<String, dynamic> json) {
     date = json['date'];

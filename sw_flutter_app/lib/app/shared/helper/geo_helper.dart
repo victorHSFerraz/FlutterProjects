@@ -7,16 +7,16 @@ class GeoHelper {
 
   GeoHelper(
       {this.by,
-        this.validKey,
-        this.results,
-        this.executionTime,
-        this.fromCache});
+      this.validKey,
+      this.results,
+      this.executionTime,
+      this.fromCache});
 
   GeoHelper.fromJson(Map<String, dynamic> json) {
     by = json['by'];
     validKey = json['valid_key'];
     results =
-    json['results'] != null ? new Results.fromJson(json['results']) : null;
+        json['results'] != null ? new Results.fromJson(json['results']) : null;
     executionTime = json['execution_time'];
     fromCache = json['from_cache'];
   }
@@ -46,21 +46,21 @@ class Results {
   Country country;
   double latitude;
   double longitude;
-  Null woeid;
+  dynamic woeid;
 
   Results(
       {this.address,
-        this.type,
-        this.city,
-        this.region,
-        this.countryName,
-        this.continent,
-        this.continentCode,
-        this.regionCode,
-        this.country,
-        this.latitude,
-        this.longitude,
-        this.woeid});
+      this.type,
+      this.city,
+      this.region,
+      this.countryName,
+      this.continent,
+      this.continentCode,
+      this.regionCode,
+      this.country,
+      this.latitude,
+      this.longitude,
+      this.woeid});
 
   Results.fromJson(Map<String, dynamic> json) {
     address = json['address'];
@@ -72,7 +72,7 @@ class Results {
     continentCode = json['continent_code'];
     regionCode = json['region_code'];
     country =
-    json['country'] != null ? new Country.fromJson(json['country']) : null;
+        json['country'] != null ? new Country.fromJson(json['country']) : null;
     latitude = json['latitude'];
     longitude = json['longitude'];
     woeid = json['woeid'];
@@ -101,9 +101,9 @@ class Results {
 class Country {
   String name;
   String code;
-  Null capital;
+  dynamic capital;
   Flag flag;
-  Null callingCode;
+  dynamic callingCode;
 
   Country({this.name, this.code, this.capital, this.flag, this.callingCode});
 

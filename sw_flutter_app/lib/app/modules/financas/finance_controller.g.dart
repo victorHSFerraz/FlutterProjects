@@ -34,6 +34,21 @@ mixin _$FinanceController on _FinanceControllerBase, Store {
     });
   }
 
+  final _$helperAtom = Atom(name: '_FinanceControllerBase.helper');
+
+  @override
+  FinanceHelper get helper {
+    _$helperAtom.reportRead();
+    return super.helper;
+  }
+
+  @override
+  set helper(FinanceHelper value) {
+    _$helperAtom.reportWrite(value, super.helper, () {
+      super.helper = value;
+    });
+  }
+
   final _$getAsyncAction = AsyncAction('_FinanceControllerBase.get');
 
   @override
@@ -44,7 +59,8 @@ mixin _$FinanceController on _FinanceControllerBase, Store {
   @override
   String toString() {
     return '''
-loading: ${loading}
+loading: ${loading},
+helper: ${helper}
     ''';
   }
 }

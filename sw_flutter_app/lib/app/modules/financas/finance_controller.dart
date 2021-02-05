@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:sw_flutter_app/app/shared/helper/finance_helper.dart';
 import 'package:sw_flutter_app/app/shared/repository/finance_repository.dart';
 import 'package:sw_flutter_app/app/shared/util/toast_message.dart';
 part 'finance_controller.g.dart';
@@ -14,6 +15,9 @@ abstract class _FinanceControllerBase with Store {
   @observable
   bool loading = false;
 
+  @observable
+  FinanceHelper helper;
+
   @action
   Future<void> get() async {
     loading = true;
@@ -21,7 +25,7 @@ abstract class _FinanceControllerBase with Store {
     var generic = await repository.get();
 
     if (generic.sucesso) {
-      var result = (generic.data).results;
+      helper = generic.data as FinanceHelper;
     } else {
       ToastMessage.notificationError("Oops!", generic.mensagem);
     }
