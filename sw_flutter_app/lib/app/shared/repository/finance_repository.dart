@@ -14,7 +14,7 @@ class FinanceRepository extends Disposable {
 
   FinanceRepository({this.service});
 
-  Future<GenericResult> getFinance() async {
+  Future<GenericResult> get() async {
     var network = await ConnectivityNetwork.isInternet();
 
     if (network.sucesso) {

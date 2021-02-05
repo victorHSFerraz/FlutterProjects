@@ -13,6 +13,10 @@ class FinancePage extends StatefulWidget {
 
 class _FinancesPageState extends ModularState<FinancePage, FinanceController> {
   //use 'controller' variable to access controller
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
