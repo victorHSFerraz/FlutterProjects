@@ -7,7 +7,7 @@ part of 'finance_service.dart';
 // **************************************************************************
 
 final $FinanceService = BindInject(
-  (i) => FinanceService(),
+  (i) => FinanceService(i<DioForNative>()),
   singleton: true,
   lazy: true,
 );

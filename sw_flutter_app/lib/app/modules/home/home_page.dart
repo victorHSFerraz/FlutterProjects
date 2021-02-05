@@ -38,7 +38,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   Expanded(child: Container()),
                   ButtonHome("Finanças", "/financas"),
                   Expanded(child: Container()),
-                  ButtonHome("Geo", "/geo"),
+                  ButtonHome("GeoIP", "/geo"),
                   Expanded(child: Container()),
                 ],
               ),
