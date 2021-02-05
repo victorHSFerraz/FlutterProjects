@@ -11,7 +11,7 @@ class FinanceService extends Disposable {
 
   FinanceService(this._dio);
 
-  Future<Response> get(double latitude, double longitude) async {
+  Future<Response> get() async {
     var response =
         await _dio.get("https://api.hgbrasil.com/finance?${ConstantApp.token}");
 

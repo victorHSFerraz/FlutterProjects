@@ -7,7 +7,7 @@ part of 'finance_repository.dart';
 // **************************************************************************
 
 final $FinanceRepository = BindInject(
-  (i) => FinanceRepository(i<DioForNative>()),
+  (i) => FinanceRepository(service: i<FinanceService>()),
   singleton: true,
   lazy: true,
 );

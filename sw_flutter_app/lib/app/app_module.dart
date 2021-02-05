@@ -1,7 +1,7 @@
 import 'shared/service/geo_service.dart';
 import 'shared/repository/geo_repository.dart';
 import 'package:dio/dio.dart';
-import 'package:sw_flutter_app/app/modules/financas/financas_module.dart';
+import 'package:sw_flutter_app/app/modules/financas/finance_module.dart';
 import 'package:sw_flutter_app/app/shared/core/custom_dio.dart';
 import 'package:sw_flutter_app/app/shared/core/http.dart';
 
@@ -29,7 +29,7 @@ class AppModule extends MainModule {
   List<ModularRouter> get routers => [
         ModularRouter(Modular.initialRoute, module: HomeModule()),
         ModularRouter("/clima", module: ClimaModule()),
-        ModularRouter("/financas", module: FinancasModule()),
+        ModularRouter("/financas", module: FinanceModule()),
         ModularRouter("/geo", module: GeoModule()),
         //ModularRouter("/home", module: HomeModule()),
         //ModularRouter("/home", module: HomeModule()),

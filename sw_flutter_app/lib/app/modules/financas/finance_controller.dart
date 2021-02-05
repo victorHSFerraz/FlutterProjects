@@ -1,12 +1,12 @@
 import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-part 'financas_controller.g.dart';
+part 'finance_controller.g.dart';
 
 @Injectable()
-class FinancasController = _FinancasControllerBase with _$FinancasController;
+class FinanceController = _FinanceControllerBase with _$FinanceController;
 
-abstract class _FinancasControllerBase with Store {
+abstract class _FinanceControllerBase with Store {
   @observable
   int value = 0;
 

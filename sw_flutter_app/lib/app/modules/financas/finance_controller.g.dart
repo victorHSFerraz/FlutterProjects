@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'financas_controller.dart';
+part of 'finance_controller.dart';
 
 // **************************************************************************
 // InjectionGenerator
 // **************************************************************************
 
-final $FinancasController = BindInject(
-  (i) => FinancasController(),
+final $FinanceController = BindInject(
+  (i) => FinanceController(),
   singleton: true,
   lazy: true,
 );
@@ -18,8 +18,8 @@ final $FinancasController = BindInject(
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$FinancasController on _FinancasControllerBase, Store {
-  final _$valueAtom = Atom(name: '_FinancasControllerBase.value');
+mixin _$FinanceController on _FinanceControllerBase, Store {
+  final _$valueAtom = Atom(name: '_FinanceControllerBase.value');
 
   @override
   int get value {
@@ -34,17 +34,17 @@ mixin _$FinancasController on _FinancasControllerBase, Store {
     });
   }
 
-  final _$_FinancasControllerBaseActionController =
-      ActionController(name: '_FinancasControllerBase');
+  final _$_FinanceControllerBaseActionController =
+      ActionController(name: '_FinanceControllerBase');
 
   @override
   void increment() {
-    final _$actionInfo = _$_FinancasControllerBaseActionController.startAction(
-        name: '_FinancasControllerBase.increment');
+    final _$actionInfo = _$_FinanceControllerBaseActionController.startAction(
+        name: '_FinanceControllerBase.increment');
     try {
       return super.increment();
     } finally {
-      _$_FinancasControllerBaseActionController.endAction(_$actionInfo);
+      _$_FinanceControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
