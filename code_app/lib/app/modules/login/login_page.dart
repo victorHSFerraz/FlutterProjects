@@ -1,6 +1,8 @@
+import 'package:code_app/app/modules/test/page1.dart';
 import 'package:code_app/app/shared/util/FadeAnimation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import 'login_controller.dart';
 
 class LoginPage extends StatefulWidget {
@@ -133,18 +135,26 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                     SizedBox(height: 30),
                     FadeAnimation(
                       1.6,
-                      Container(
-                        height: 50,
-                        margin: EdgeInsets.symmetric(horizontal: 50),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: Colors.purple[800]),
-                        child: Center(
-                          child: Text(
-                            "Login",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                settings:
+                                    RouteSettings(name: Page1().routeName),
+                                builder: (_) => Page1())),
+                        child: Container(
+                          height: 50,
+                          margin: EdgeInsets.symmetric(horizontal: 50),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.purple[800]),
+                          child: Center(
+                            child: Text(
+                              "Login",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ),
                       ),
